@@ -24,27 +24,26 @@ public class BuscarLibroServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtener parámetros del formulario
+
         String criterio = request.getParameter("criterio");
         String valor = request.getParameter("valor");
 
         try {
-            // Conectar a la base de datos
+
             DSLContext query = DBGenerator.conectarBD("LibreriaBD");
 
-            // Buscar libros
+
             LibroDAO libroDAO = new LibroDAO();
             List<Libro> librosEncontrados = libroDAO.buscarLibros(query, criterio, valor);
 
-            // Puedes almacenar la lista de libros encontrados en el request para mostrarla en la página JSP
+
             request.setAttribute("librosEncontrados", librosEncontrados);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            // Manejar la excepción de manera adecuada en un entorno de producción
+
         }
 
-        // Redirigir a una página que muestre los resultados de la búsqueda
         request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
     }
 }

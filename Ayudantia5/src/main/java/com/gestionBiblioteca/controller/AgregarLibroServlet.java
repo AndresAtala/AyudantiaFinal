@@ -26,31 +26,28 @@ public class AgregarLibroServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtener parámetros del formulario
         String titulo = request.getParameter("titulo");
         String autor = request.getParameter("autor");
         String isbn = request.getParameter("isbn");
         String genero = request.getParameter("genero");
         int anoPublicacion = Integer.parseInt(request.getParameter("anoPublicacion"));
 
-        // Crear un objeto Libro con la información
+
         Libro libro = new Libro(titulo, autor, isbn, genero, anoPublicacion);
 
         try {
-            // Conectar a la base de datos
             DSLContext query = DBGenerator.conectarBD("LibreriaBD");
 
-            // Agregar el libro a la base de datos
             LibroDAO libroDAO = new LibroDAO();
             libroDAO.agregarLibro(query, libro);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            // Manejar la excepción de manera adecuada en un entorno de producción
+
         }
 
-        // Redirigir a una página de éxito o mostrar un mensaje
-        response.sendRedirect("index.jsp"); //cambiar INdex por otra wea
+
+        response.sendRedirect("index.jsp");
     }
 }
 

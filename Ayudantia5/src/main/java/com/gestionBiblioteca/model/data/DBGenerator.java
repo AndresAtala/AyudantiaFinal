@@ -38,7 +38,6 @@ public class DBGenerator {
     }
 
     private static void crearTablas(DSLContext create) {
-        // Crear tabla Libro
         create.createTableIfNotExists("Libro")
                 .column("titulo", VARCHAR(100))
                 .column("autor", VARCHAR(100))
@@ -48,7 +47,6 @@ public class DBGenerator {
                 .constraint(primaryKey("isbn"))
                 .execute();
 
-        // Crear tabla Usuario
         create.createTableIfNotExists("Usuario")
                 .column("nombre", VARCHAR(100))
                 .column("id", VARCHAR(20))
@@ -58,7 +56,6 @@ public class DBGenerator {
                 .constraint(primaryKey("id"))
                 .execute();
 
-        // Crear tabla Préstamo
         create.createTableIfNotExists("Prestamo")
                 .column("isbn", VARCHAR(20).nullable(false))
                 .column("idUsuario", VARCHAR(20).nullable(false))
@@ -69,7 +66,6 @@ public class DBGenerator {
                 .constraint(foreignKey("idUsuario").references("Usuario", "id"))
                 .execute();
 
-        // Crear tabla Biblioteca
         create.createTableIfNotExists("Biblioteca")
                 .column("nombre", VARCHAR(100))
                 .column("direccion", VARCHAR(200))

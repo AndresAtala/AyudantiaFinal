@@ -28,12 +28,10 @@ public class RealizarPrestamoServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtener parámetros del formulario
         String idUsuario = request.getParameter("idUsuario");
         String isbnLibro = request.getParameter("isbnLibro");
         String fechaInicioStr = request.getParameter("fechaInicio");
 
-        // Convertir la fecha de inicio a un objeto Date
         Date fechaInicio = null;
         try {
             fechaInicio = new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicioStr);
@@ -41,22 +39,19 @@ public class RealizarPrestamoServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Crear objetos Libro, Usuario y Prestamo
-        Libro libro = new Libro(); // Necesitas obtener el libro de la base de datos según el ISBN
-        Usuario usuario = new Usuario(); // Necesitas obtener el usuario de la base de datos según el ID
-        Prestamo prestamo = new Prestamo(libro, usuario, fechaInicio, null); // Fecha de devolución inicialmente nula
+
+        Libro libro = new Libro();
+        Usuario usuario = new Usuario();
+        Prestamo prestamo = new Prestamo(libro, usuario, fechaInicio, null);
 
         try {
-            // Conectar a la base de datos
             DSLContext query = DBGenerator.conectarBD("LibrosBD");
 
-            // Realizar el préstamo
             PrestamoDAO prestamoDAO = new PrestamoDAO();
             prestamoDAO.realizarPrestamo(query, prestamo); // Corregir esta línea
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            // Manejar la excepción de manera adecuada en un entorno de producción
         }
         response.sendRedirect("index.jsp");
 

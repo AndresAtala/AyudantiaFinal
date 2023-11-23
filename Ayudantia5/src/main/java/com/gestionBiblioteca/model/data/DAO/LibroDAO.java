@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LibroDAO {
 
-    // Método para agregar un libro a la base de datos
+
     public void agregarLibro(DSLContext query, Libro libro) {
         try {
             query.insertInto(table("Libro"),
@@ -30,7 +30,6 @@ public class LibroDAO {
         }
     }
 
-    // Método para obtener todos los libros de la base de datos
     public List<Libro> obtenerTodosLosLibros(DSLContext query) {
         List<Libro> libros = new ArrayList<>();
         Result<Record> result = query.select().from(table("Libro")).fetch();
@@ -41,7 +40,7 @@ public class LibroDAO {
         return libros;
     }
 
-    // Método para buscar libros por título, autor o ISBN
+
     public List<Libro> buscarLibros(DSLContext query, String criterio, String valor) {
         List<Libro> libros = new ArrayList<>();
         Result<Record> result = query.select().from(table("Libro")).where(field(criterio).like("%" + valor + "%")).fetch();

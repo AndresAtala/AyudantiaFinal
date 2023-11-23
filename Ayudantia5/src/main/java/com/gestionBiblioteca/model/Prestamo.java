@@ -8,7 +8,7 @@ public class Prestamo {
     private Date fechaInicio;
     private Date fechaDevolucion;
 
-    // Constructor
+
     public Prestamo(Libro libro, Usuario usuario, Date fechaInicio, Date fechaDevolucion) {
         this.libro = libro;
         this.usuario = usuario;
@@ -16,7 +16,7 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    // Getters y setters
+
     public Libro getLibro() {
         return libro;
     }

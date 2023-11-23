@@ -7,7 +7,7 @@ public class Usuario {
     private String numeroTelefono;
     private String correoElectronico;
 
-    // Constructor
+
     public Usuario(String nombre, String id, String direccion, String numeroTelefono, String correoElectronico) {
         this.nombre = nombre;
         this.id = id;
@@ -20,7 +20,6 @@ public class Usuario {
 
     }
 
-    // Getters y setters
     public String getNombre() {
         return nombre;
     }

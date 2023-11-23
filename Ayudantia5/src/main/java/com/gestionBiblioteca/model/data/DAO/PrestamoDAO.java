@@ -10,7 +10,6 @@ import static org.jooq.impl.DSL.*;
 
 public class PrestamoDAO {
 
-    // Método para realizar un préstamo
     public void realizarPrestamo(DSLContext query, Prestamo prestamo) {
         try {
             query.insertInto(table("Prestamo"),
@@ -25,11 +24,11 @@ public class PrestamoDAO {
                     .execute();
         } catch (Exception e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
+
         }
     }
 
-    // Método para devolver un libro
+
     public void devolverLibro(DSLContext query, String isbn, String idUsuario, Date fechaDevolucion) {
         try {
             query.update(table("Prestamo"))
@@ -40,11 +39,11 @@ public class PrestamoDAO {
                     .execute();
         } catch (Exception e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
+
         }
     }
 
-    // Método para obtener préstamos vigentes
+
     public List<Prestamo> obtenerPrestamosVigentes(DSLContext query) {
         List<Prestamo> prestamos = null;
         try {
@@ -53,7 +52,6 @@ public class PrestamoDAO {
                     .fetchInto(Prestamo.class);
         } catch (Exception e) {
             e.printStackTrace();
-            // Manejar la excepción adecuadamente
         }
         return prestamos;
     }
